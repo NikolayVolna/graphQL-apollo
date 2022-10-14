@@ -5,6 +5,7 @@ import './styles/index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import { setContext } from '@apollo/client/link/context';
+import { AUTH_TOKEN } from './constants';
 
 import {
   ApolloProvider,
@@ -19,12 +20,12 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('AUTH_TOKEN');
   // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : "",
+      authorization: token ? `Bearer ${AUTH_TOKEN}` : '',
     }
   }
 });
